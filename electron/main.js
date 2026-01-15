@@ -6,10 +6,17 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
+        autoHideMenuBar: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
             nodeIntegration: false,
+            defaultFontFamily: {
+                standard: 'Arial',
+                serif: 'Times New Roman',
+                sansSerif: 'Arial',
+                monospace: 'Courier New'
+            }
         },
     });
 
@@ -21,14 +28,23 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    ipcMain.handle('project:create', async (event, { name, description, due_date }) => {
-        if (!name) throw new Error('Project name is required');
-        return db.createProject(name, description, due_date);
+    ipcMain.handle('project:getAll', async (event) => {
+        return db.getAllProjects();
     });
 
-    ipcMain.handle('project:addDetail', async (event, { project_id, key, value, status, priority }) => {
+    ipcMain.handle('project:create', async (event, { name, description, due_date, status }) => {
+        if (!name) throw new Error('Project name is required');
+        return db.createProject(name, description, due_date, status);
+    });
+
+    ipcMain.handle('project:update', async (event, { project_id, name, description, due_date, status }) => {
         if (!project_id) throw new Error('Project ID is required');
-        return db.addProjectDetail(project_id, key, value, status, priority);
+        return db.updateProject(project_id, name, description, due_date, status);
+    });
+
+    ipcMain.handle('project:addDetail', async (event, { project_id, key, value, is_completed }) => {
+        if (!project_id) throw new Error('Project ID is required');
+        return db.addProjectDetail(project_id, key, value, is_completed);
     });
 
     ipcMain.handle('project:getWithDetails', async (event, project_id) => {
@@ -36,14 +52,19 @@ app.whenReady().then(() => {
         return db.getProjectWithDetails(project_id);
     });
 
-    ipcMain.handle('project:updateDetail', async (event, { project_detail_id, key, value, status, priority }) => {
+    ipcMain.handle('project:updateDetail', async (event, { project_detail_id, key, value, is_completed }) => {
         if (!project_detail_id) throw new Error('Project detail ID is required');
-        return db.updateProjectDetail(project_detail_id, key, value, status, priority);
+        return db.updateProjectDetail(project_detail_id, key, value, is_completed);
     });
 
     ipcMain.handle('project:delete', async (event, project_id) => {
         if (!project_id) throw new Error('Project ID is required');
         return db.deleteProject(project_id);
+    });
+
+    ipcMain.handle('project:deleteDetail', async (event, project_detail_id) => {
+        if (!project_detail_id) throw new Error('Project detail ID is required');
+        return db.deleteProjectDetail(project_detail_id);
     });
 
     createWindow();
