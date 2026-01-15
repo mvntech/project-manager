@@ -13,6 +13,7 @@ function createWindow() {
             contextIsolation: true,
             nodeIntegration: false,
             sandbox: true,
+            devTools: process.env.VITE_DEV_SERVER_URL ? true : false,
             defaultFontFamily: {
                 standard: 'Arial',
                 serif: 'Times New Roman',

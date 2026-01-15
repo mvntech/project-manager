@@ -149,7 +149,7 @@ const ProjectDetails = ({ projectId, onBack }) => {
                     ) : (
                         <div className="divide-y divide-border">
                             {project.details.map((prop) => (
-                                <div key={prop.id} className="p-4 hover:bg-primary-foreground/50 transition-colors flex items-center justify-between group">
+                                <div key={prop.id} className="flex items-center justify-between p-4 group">
                                     <div className="flex-1 grid grid-cols-12 gap-4 items-center">
                                         <div className="col-span-1 flex justify-start">
                                             <button

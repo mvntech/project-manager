@@ -1,4 +1,4 @@
-# Logs
+# logs
 logs
 *.log
 npm-debug.log*
@@ -7,19 +7,32 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# dependencies
 node_modules
+
+# euild outputs
 dist
 dist-ssr
-*.local
-.env
+release
+out
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# environment
+.env
+.env.local
+.env.*.local
+
+# OS / editor
 .DS_Store
+.idea
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+
+# electron
+*.asar

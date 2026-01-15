@@ -98,7 +98,7 @@ const ProjectList = ({ onSelectProject }) => {
                 <div>
                     <div className="flex items-center gap-2 mb-1">
                         <h1 className="text-3xl font-bold tracking-tight">Hi, Muntaha!</h1>
-                        <img src={"/icon.png"} className="w-8 h-8 object-contain" alt="logo" />
+                        <img src={"./icon.png"} className="w-8 h-8 object-contain" alt="logo" />
                     </div>
                     <p className="text-muted-foreground">Manage and track your project progress.</p>
                 </div>
