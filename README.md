@@ -5,8 +5,6 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.0.0-blue)]()
 
----
-
 ## table of contents
 
 * [introduction](#introduction)
@@ -18,8 +16,6 @@
 * [testing](#testing)
 * [contributing](#contributing)
 * [license](#license)
-
----
 
 ## introduction
 
@@ -33,8 +29,6 @@ project manager (desktop app) is a minimal, offline-first tool for managing proj
 * lightweight and fast desktop experience built with electron + react (vite)
 * offline database using sqlite via `better-sqlite3`
 
----
-
 ## prerequisites
 
 before running the project, ensure the following are installed:
@@ -43,8 +37,6 @@ before running the project, ensure the following are installed:
 * [npm](https://www.npmjs.com/)
 * windows/macOS/linux (for electron support)
 * optional: administrator access (required for building windows installer)
-
----
 
 ## installation
 
@@ -61,8 +53,6 @@ npm install
 # run in development mode
 npm run dev
 ```
-
----
 
 ## usage
 
@@ -86,8 +76,6 @@ release/project manager-setup-0.0.0.exe
 
 install and launch the app. you can now create and manage projects with their associated properties.
 
----
-
 ## configuration
 
 environment variables and configuration options:
@@ -101,8 +89,6 @@ electron-specific configuration is in `electron/main.js`, including:
 * `contextIsolation: true`
 * `nodeIntegration: false`
 * preload scripts for secure ipc
-
----
 
 ## api documentation
 
@@ -180,8 +166,6 @@ closeDatabase()
 
 closes the sqlite connection safely.
 
----
-
 ## testing
 
 no automated tests currently. manual test procedure:
@@ -190,8 +174,6 @@ no automated tests currently. manual test procedure:
 2. create a new project and add details
 3. update and delete projects
 4. verify database persistence in `userData/projects.db`
-
----
 
 ## contributing
 
@@ -217,8 +199,6 @@ git push origin feature/amazing-feature
 ```
 
 5. open a pull request
-
----
 
 ## license
 
