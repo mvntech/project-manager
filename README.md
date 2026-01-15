@@ -3,7 +3,7 @@
 > a lightweight electron + react desktop app for managing project details locally with a clean, fast, and offline-first experience.
 
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.0.0-blue)]()
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)]()
 
 ## table of contents
 
