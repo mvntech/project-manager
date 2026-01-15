@@ -7,10 +7,12 @@ function createWindow() {
         width: 800,
         height: 600,
         autoHideMenuBar: true,
+        icon: path.join(__dirname, '../public/favicon.ico'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
             nodeIntegration: false,
+            sandbox: true,
             defaultFontFamily: {
                 standard: 'Arial',
                 serif: 'Times New Roman',
@@ -33,37 +35,37 @@ app.whenReady().then(() => {
     });
 
     ipcMain.handle('project:create', async (event, { name, description, due_date, status }) => {
-        if (!name) throw new Error('Project name is required');
+        if (!name || typeof name !== 'string') throw new Error('Valid project name is required');
         return db.createProject(name, description, due_date, status);
     });
 
     ipcMain.handle('project:update', async (event, { project_id, name, description, due_date, status }) => {
-        if (!project_id) throw new Error('Project ID is required');
+        if (!project_id || typeof project_id !== 'number') throw new Error('Valid project ID is required');
         return db.updateProject(project_id, name, description, due_date, status);
     });
 
     ipcMain.handle('project:addDetail', async (event, { project_id, key, value, is_completed }) => {
-        if (!project_id) throw new Error('Project ID is required');
+        if (!project_id || typeof project_id !== 'number') throw new Error('Valid project ID is required');
         return db.addProjectDetail(project_id, key, value, is_completed);
     });
 
     ipcMain.handle('project:getWithDetails', async (event, project_id) => {
-        if (!project_id) throw new Error('Project ID is required');
+        if (!project_id || typeof project_id !== 'number') throw new Error('Valid project ID is required');
         return db.getProjectWithDetails(project_id);
     });
 
     ipcMain.handle('project:updateDetail', async (event, { project_detail_id, key, value, is_completed }) => {
-        if (!project_detail_id) throw new Error('Project detail ID is required');
+        if (!project_detail_id || typeof project_detail_id !== 'number') throw new Error('Valid project detail ID is required');
         return db.updateProjectDetail(project_detail_id, key, value, is_completed);
     });
 
     ipcMain.handle('project:delete', async (event, project_id) => {
-        if (!project_id) throw new Error('Project ID is required');
+        if (!project_id || typeof project_id !== 'number') throw new Error('Valid project ID is required');
         return db.deleteProject(project_id);
     });
 
     ipcMain.handle('project:deleteDetail', async (event, project_detail_id) => {
-        if (!project_detail_id) throw new Error('Project detail ID is required');
+        if (!project_detail_id || typeof project_detail_id !== 'number') throw new Error('Valid project detail ID is required');
         return db.deleteProjectDetail(project_detail_id);
     });
 
@@ -80,4 +82,8 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
     }
+});
+
+app.on('will-quit', () => {
+    db.closeDatabase();
 });
